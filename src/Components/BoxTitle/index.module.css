@@ -1,0 +1,13 @@
+.boxTitle{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 2px;
+}
+.boxTitle >div {
+  align-self: flex-end;
+}
+.boxTitle h2{
+  font-size: 16px;
+}
+
