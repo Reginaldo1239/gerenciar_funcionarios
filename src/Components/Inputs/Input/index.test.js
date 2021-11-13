@@ -1,5 +1,4 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import "@testing-library/jest-dom/extend-expect"
 import Styles from './index.module.css';
 import { Input } from '../index';
 
@@ -40,12 +39,11 @@ describe('teste de atributos comuns com classe fullWidth,e com boxMessageError',
     }
   }
   test('esta tudo ok', () => {
-    const { input,container,findByText } = setup()
-    expect(container.getElementsByClassName(Styles.boxMessageError)).toHaveTextContent(messageError);
+    const { input,container } = setup()
+    expect(container.getElementsByClassName(Styles.boxMessageError)[0]).toHaveTextContent(messageError);
     expect(container.getElementsByClassName(Styles.container).length).toBe(1);
     expect(container.getElementsByClassName(Styles.fullWidth).length).toBe(1);
     expect(container.getElementsByClassName(Styles.boxMessageError).length).toBe(1);
-
     expect(input).toHaveAttribute('id',id);
     expect(input).toHaveAttribute('name',name);
   });
