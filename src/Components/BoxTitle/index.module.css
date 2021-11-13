@@ -7,7 +7,7 @@
 .boxTitle >div {
   align-self: flex-end;
 }
-.boxTitle h2{
+.boxTitle >div > h2{
   font-size: 16px;
 }
 
