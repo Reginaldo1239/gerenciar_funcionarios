@@ -1,16 +1,17 @@
 export const convertArrayToObject = (array, key) => {
   const initialValue = {};
-  return array.reduce((obj, item) => {
+  return array.reduce((object, item) => {
     return {
-      ...obj,
+      ...object,
       [item[key]]: item,
     };
   }, initialValue);
 };
 
-export const filterObject = (object, keysArrayToFilter) => {
-  for (let key of keysArrayToFilter) {
-    if (object[key]) {
+
+export const filterObject = (object, callback) => {
+  for (let key in object) {
+    if (!callback(object[key])) {
       delete object[key]
     }
   }
