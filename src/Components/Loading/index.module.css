@@ -1,0 +1,32 @@
+.containerLoading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+  transition: all;
+}
+
+.containerLoading >div{
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 8px;
+  background-color: #fff;
+  animation-name: pulsar;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+}
+
+
+@keyframes pulsar{
+  from {
+    opacity:1 ;}
+  to {
+    opacity: 0;
+  }
+}
