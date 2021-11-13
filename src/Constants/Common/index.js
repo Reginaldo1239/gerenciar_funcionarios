@@ -1,0 +1,1 @@
+export const DEPENDENT_TO_DISCOUNT = 164.56;

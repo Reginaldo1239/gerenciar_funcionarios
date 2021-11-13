@@ -5,10 +5,11 @@ import './Styles/Variables/index.css'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import {store,persistor} from './Redux/Store';
+import { store, persistor } from './Redux/Store';
 import Header from './Components/Header';
 import Content from './Components/Content';
 import Footer from './Components/Footer';
+import Loading from './Components/Loading';
 import Routes from './Routes'
 
 function App() {
@@ -16,12 +17,9 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-          <Header />
-          <Content>
-            <Routes />
-          </Content>
-          <Footer />
+          <Routes />
         </div>
+        <Loading />
       </PersistGate>
     </Provider >
 
