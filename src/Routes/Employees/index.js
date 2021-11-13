@@ -1,10 +1,12 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
+import { useSelector } from "react-redux";
 import { Button } from "../../Components/Buttons";
 import BoxTitle from "../../Components/BoxTitle";
 import Table from '../../Components/Table';
 import Styles from './index.module.css'
 
 const Employees = (props) => {
+  const employees = useSelector((state)=>state);
   const columns = [
     {
       title: 'Nome',
@@ -63,7 +65,9 @@ const Employees = (props) => {
     },
   ];
 
-
+  useEffect(()=>{
+    console.log('employees',employees)
+  },[employees])
   return (
     <div className={Styles.container}>
 
