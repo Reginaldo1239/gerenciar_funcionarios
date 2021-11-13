@@ -21,9 +21,9 @@ export default function Input(props) {
   } = props;
 
   const masks = {
-    cpf: maskEventInputCpf,
-    currency: maskEventInputCurrency,
-    number: maskEventInputNumberOnly
+    cpf: (event) => onChange(maskEventInputCpf(event)),
+    currency: (event) => onChange(maskEventInputCurrency(event)),
+    number: (event) => onChange(maskEventInputNumberOnly(event))
   }
 
   return (
@@ -31,7 +31,7 @@ export default function Input(props) {
       classNames(Styles.container)
     }>
       <div>
-        <label for={id}>{label}</label>
+        <label htmlFor={id}>{label}</label>
       </div>
       <div>
         <input
@@ -41,12 +41,13 @@ export default function Input(props) {
             )
           }
           id={id}
-          autocomplete={autocomplete || 'off'}
+          autoComplete={autocomplete || 'off'}
           name={name}
-          onChange={onChange}
+          value={value}
+          onChange={masks[mask] || onChange}
           placeholder={placeholder}
-          onKeyUp={masks[mask] || null}
-          onKeyDown={masks[mask] || null}
+          onKeyUp={masks[mask]}
+          onKeyDown={masks[mask]}
 
         />
       </div>
