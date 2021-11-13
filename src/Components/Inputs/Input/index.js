@@ -13,10 +13,8 @@ export default function Input(props) {
     name,
     label,
     onChange,
-    placeholder,
     fullWidth,
     messageError,
-    autocomplete,
     value,
   } = props;
 
@@ -41,11 +39,10 @@ export default function Input(props) {
             )
           }
           id={id}
-          autoComplete={autocomplete || 'off'}
+          autoComplete='off'
           name={name}
           value={value}
           onChange={masks[mask] || onChange}
-          placeholder={placeholder}
           onKeyUp={masks[mask]}
           onKeyDown={masks[mask]}
 

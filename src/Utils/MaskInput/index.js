@@ -1,7 +1,6 @@
 
 export const maskEventInputCpf = (event) => {
   let value = event.currentTarget.value;
-  console.log(event)
   if (event.key == 'Backspace' || event.nativeEvent.inputType === 'deleteContentBackward') {
     return event;
   }
