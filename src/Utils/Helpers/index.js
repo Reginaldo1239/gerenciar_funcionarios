@@ -8,12 +8,11 @@ export const convertArrayToObject = (array, key) => {
   }, initialValue);
 };
 
-export const filterObject = (object, keysToFilter=[]) => {
-  for (let key of keysToFilter) {
+export const filterObject = (object, keysArrayToFilter) => {
+  for (let key of keysArrayToFilter) {
     if (object[key]) {
       delete object[key]
     }
   }
-  return object
-
+  return object;
 }
