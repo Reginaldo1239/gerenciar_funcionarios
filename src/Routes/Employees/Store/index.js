@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
+import { fetchEmployee, saveEmployee } from '../../../Redux/Actions/EmployeeAction';
+import { toogleLoading } from '../../../Redux/Actions/LoadingAction';
 import { Input } from '../../../Components/Inputs';
 import { Button } from '../../../Components/Buttons';
 import BoxTitle from '../../../Components/BoxTitle';
+import {DEPENDENT_TO_DISCOUNT} from '../../../Constants/Common'
 import Styles from './index.module.css';
 export const Store = (props) => {
   const paramsFormData = {
@@ -17,17 +21,59 @@ export const Store = (props) => {
   const [formData, setFormData] = useState(paramsFormData);
   const [formDataError, setFormDataError] = useState(paramsFormData);
   const [error, setError] = useState('');
+  const employee = useSelector((state) => state.Employee[routeParams?.id]);
+  const dispatch = useDispatch();
+
 
   const onHandelerFormData = (event) => {
     let { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   }
 
-  const onSubmitForm = () => {
 
-    history.replace({ pathname: `/employees/store/${1}`, state: { isActive: true } });
+  const _fetchEmployee = () => {
+    fetchEmployee({ id: routeParams?.id }, {
+      callback: () => null,
+      fallback: () => null
+    })
+  }
+
+
+  const onSubmitForm = () => {
+    dispatch(toogleLoading(true));
+    let formDataAux = formData;
+    if (routeParams?.id) {
+      formDataAux['id'] = routeParams?.id;
+    }
+    formDataAux['salario_base'] = calcSalaryBase(formDataAux);
+    dispatch(saveEmployee(formData, {
+      callback: (data) => setTimeout(() => {
+         dispatch(toogleLoading(false))
+         history.replace({ pathname: `/employees/store/${data.id}`, state: { isActive: true } });
+
+        }, 2000),
+      fallback: () => setTimeout(() => { dispatch(toogleLoading(false)) }, 2000),
+    }))
 
   }
+  const calcSalaryBase = (data) => {
+    let { salario, desconto, dependentes, } = data;
+    return (salario - desconto) - (dependentes * DEPENDENT_TO_DISCOUNT);
+  }
+
+  useEffect(() => {
+    if (employee) {
+      setFormData((prevState) => ({
+        ...employee,
+      }));
+    }
+  }, [employee?.id]);
+
+
+  useEffect(() => {
+    !employee && _fetchEmployee();
+  }, [routeParams?.id])
+
 
   return (
     <div className={Styles.container}>
@@ -39,8 +85,8 @@ export const Store = (props) => {
           id='inputNome'
           name='nome'
           onChange={onHandelerFormData}
-          value={formData.name}
-          messageError={formDataError.name}
+          value={formData.nome}
+          messageError={formDataError.nome}
         />
         <Input
           fullWidth

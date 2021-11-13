@@ -5,11 +5,7 @@
   margin: 0 auto;
   max-width: 1000px;
 }
-.containerTable h2{
-  font-size: 20px;
 
-
-}
 .containerTable >div:first-of-type{
   width: 100%;
   display: flex;
