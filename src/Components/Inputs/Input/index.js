@@ -21,45 +21,43 @@ export default function Input(props) {
   } = props;
 
   const masks = {
-    cpf: (event) => maskEventInputCpf(event),
-    currency: (event) => maskEventInputCurrency(event),
-    number: (event) => maskEventInputNumberOnly(event)
+    cpf: maskEventInputCpf,
+    currency: maskEventInputCurrency,
+    number: maskEventInputNumberOnly
   }
 
-
-
-return (
-  <div className={
-    classNames(Styles.container)
-  }>
-    <div>
-      <label for={id}>{label}</label>
-    </div>
-    <div>
-      <input
-        className={
-          classNames(
-            fullWidth && Styles.fullWidth
-          )
-        }
-        id={id}
-        autocomplete={autocomplete || 'off'}
-        name={name}
-        onChange={onChange}
-        placeholder={placeholder}
-        onKeyUp={masks[mask] || null}
-        onKeyDown={masks[mask] || null}
-
-      />
-    </div>
+  return (
     <div className={
-      classNames(
-        Styles.boxMessageError,
-        messageError && Styles.boxMessageErrorShow
-      )
+      classNames(Styles.container)
     }>
-      <span>{messageError}</span>
+      <div>
+        <label for={id}>{label}</label>
+      </div>
+      <div>
+        <input
+          className={
+            classNames(
+              fullWidth && Styles.fullWidth
+            )
+          }
+          id={id}
+          autocomplete={autocomplete || 'off'}
+          name={name}
+          onChange={onChange}
+          placeholder={placeholder}
+          onKeyUp={masks[mask] || null}
+          onKeyDown={masks[mask] || null}
+
+        />
+      </div>
+      <div className={
+        classNames(
+          Styles.boxMessageError,
+          messageError && Styles.boxMessageErrorShow
+        )
+      }>
+        <span>{messageError}</span>
+      </div>
     </div>
-  </div>
-)
+  )
 }
