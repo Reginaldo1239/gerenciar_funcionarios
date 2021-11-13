@@ -1,0 +1,23 @@
+{"employees":
+  {
+      "data":[
+              {
+                  "id":1,
+                  "nome":"nome",
+                  "cpf":"936.938.039-60",
+                  "salario":998,
+                  "desconto":74.85,
+                  "dependentes":2
+                },
+                {
+                  "id":2,
+                  "nome":"Edson Thiago Drumond",
+                  "cpf":"748.517.476-24",
+                  "salario":1045,
+                  "desconto":78.38,
+                  "dependentes":1
+                  }
+              ]
+    }
+}
+
