@@ -1,0 +1,14 @@
+.containerIsEmpty{
+  width: 100%;
+  text-align: center;
+  margin-top: 60px;
+
+}
+.containerIsEmpty h4{
+  display: inline-block;
+  border-radius: 10px;
+  padding: 16px 8px;
+  background-color: var(--primaryBackgroundColor);
+  border:1px solid black;
+
+}
