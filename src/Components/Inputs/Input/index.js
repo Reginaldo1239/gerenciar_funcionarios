@@ -43,9 +43,6 @@ export default function Input(props) {
           name={name}
           value={value}
           onChange={masks[mask] || onChange}
-          onKeyUp={masks[mask]}
-          onKeyDown={masks[mask]}
-
         />
       </div>
       <div className={
