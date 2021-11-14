@@ -4,11 +4,11 @@ import { store, persistor } from '../../Redux/Store';
 const ReduxProvider = (props) => {
   const { children } = props;
   return (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>)
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         {children}
-    </PersistGate>
-  </Provider >
+      </PersistGate>
+    </Provider >
   )
 }
 export default ReduxProvider;
