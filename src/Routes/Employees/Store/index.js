@@ -69,7 +69,7 @@ export const Store = (props) => {
     setFormDataError((prevState) => ({ ...initialParamsFormData }));
     console.log(data)
     for (let name in data) {
-      if (!data[name]?.length === 0) {
+      if (!data[name]?.length === 0||!data[name]) {
         setFormDataError((prevState) => ({ ...prevState, [name]: "Campo obrigatório" }));
         errors.push({ name: 'Campo obrigátorio' })
       }
