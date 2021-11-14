@@ -45,7 +45,7 @@ const Employees = (props) => {
       dataIndex: 'dependentes',
       key: 'dependentes',
     },{
-      title: 'Dependentes IRRF',
+      title: 'Desconto IRRF',
       dataIndex: 'desconto_imposto_renda',
       key: 'desconto_imposto_renda',
     },
@@ -97,13 +97,11 @@ const Employees = (props) => {
           title='Funcionários'
           componentRight={<div><Button to='/employees/store'>Novo</Button></div>}
         />
-
         <Table
           columns={columns}
           dataSource={employeesArray}
           visible={employeesArray?.length>0}
         />
-
         <IsEmpty visible={employeesArray?.length===0} title='Nenhum funcionário encontrado' />
       </div>
     </div>
