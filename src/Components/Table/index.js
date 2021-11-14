@@ -46,11 +46,11 @@ const Employees = (props) => {
       <table>
         <tbody>
           <tr>
-            {columns.map(({ key, title }) =>
+            {columns?.map(({ key, title }) =>
               <th key={key}>{title}</th>
             )}
           </tr>
-          {dataSource.map((data, index) => {
+          {dataSource?.map((data, index) => {
             let cell = -1;
             return (
               <tr key={index}>
