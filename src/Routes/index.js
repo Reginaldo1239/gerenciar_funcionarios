@@ -14,6 +14,7 @@ import Footer from "../Components/Footer";
 
 
 const Routes = (props) => {
+  const {children} = props;
   return (
     <Router>
       <Header/>
@@ -25,8 +26,10 @@ const Routes = (props) => {
           <Route exact path={`/employees/store/:id`} component={EmployeeStore} />
           <Route exact path={`*`} component={() => <div>page not found</div>} />
         </Switch>
+
       </Content>
       <Footer />
+      {children}
     </Router>
   )
 }

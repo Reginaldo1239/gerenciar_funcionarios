@@ -1,0 +1,14 @@
+.containerNotification{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 10%;
+  right: 5%;
+  background-color: #fff;
+  min-width: 300px;
+  min-height: 150px;
+  box-shadow: 1px 2px 10px 1px rgba(0,0,0,0.4);
+  border-radius:16px;
+
+}

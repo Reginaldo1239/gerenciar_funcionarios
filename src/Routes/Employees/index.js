@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteEmployee, fetchEmployees } from '../../Redux/Actions/EmployeeAction';
 import { toogleLoading } from "../../Redux/Actions/LoadingAction";
+import { toogleNotification } from "../../Redux/Actions/NotificationAction";
 import { Button } from "../../Components/Buttons";
 import BoxTitle from "../../Components/BoxTitle";
 import IsEmpty from "../../Components/IsEmpty";
@@ -11,7 +12,7 @@ import Styles from './index.module.css'
 const Employees = (props) => {
   const employees = useSelector((state) => state.Employee);
   const dispatch = useDispatch();
-  const employeesArray = useMemo(()=>Object.values(employees),[employees]);
+  const employeesArray = useMemo(() => Object.values(employees), [employees]);
 
   const columns = [
     {
@@ -44,7 +45,7 @@ const Employees = (props) => {
       title: 'Dependentes',
       dataIndex: 'dependentes',
       key: 'dependentes',
-    },{
+    }, {
       title: 'Desconto IRRF',
       dataIndex: 'desconto_imposto_renda',
       key: 'desconto_imposto_renda',
@@ -80,7 +81,12 @@ const Employees = (props) => {
   const _deleteEmployee = (id) => {
     dispatch(toogleLoading(true));
     dispatch(deleteEmployee({ id }, {
-      callback: () => dispatch(toogleLoading(false)),
+      callback: () => {
+        setTimeout(() => {
+          dispatch(toogleNotification({ show: true, title: 'Deletado' }));
+          dispatch(toogleLoading(false))
+        }, 2000)
+      },
       fallback: () => dispatch(toogleLoading(false)),
     }))
   }
@@ -100,9 +106,9 @@ const Employees = (props) => {
         <Table
           columns={columns}
           dataSource={employeesArray}
-          visible={employeesArray?.length>0}
+          visible={employeesArray?.length > 0}
         />
-        <IsEmpty visible={employeesArray?.length===0} title='Nenhum funcionário encontrado' />
+        <IsEmpty visible={employeesArray?.length === 0} title='Nenhum funcionário encontrado' />
       </div>
     </div>
   )

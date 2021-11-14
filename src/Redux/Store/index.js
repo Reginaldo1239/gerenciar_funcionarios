@@ -10,7 +10,7 @@ const initialState = {};
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['Loading']
+  blacklist: ['Loading','Notification']
 }
 
 

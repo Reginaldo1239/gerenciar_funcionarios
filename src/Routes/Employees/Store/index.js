@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { fetchEmployee, saveEmployee } from '../../../Redux/Actions/EmployeeAction';
 import { toogleLoading } from '../../../Redux/Actions/LoadingAction';
+import { toogleNotification } from '../../../Redux/Actions/NotificationAction';
 import { Input } from '../../../Components/Inputs';
 import { Button } from '../../../Components/Buttons';
 import BoxTitle from '../../../Components/BoxTitle';
@@ -50,10 +51,13 @@ export const Store = (props) => {
       formDataAux['desconto_imposto_renda'] = calculateIncomeTax(formDataAux.salario_base);
       dispatch(saveEmployee(formData, {
         callback: (data) => {
-          if (!routeParams?.id) {
-            setFormData((prevState) => ({ ...initialParamsFormData }))
-          }
-          dispatch(toogleLoading(false));
+          setTimeout(() => {
+            if (!routeParams?.id) {
+              setFormData((prevState) => ({ ...initialParamsFormData }))
+            }
+            dispatch(toogleLoading(false));
+            dispatch(toogleNotification({ show: true, title: 'Salvo' }))
+          }, 2000)
         },
         fallback: () => dispatch(toogleLoading(false)),
       }))
@@ -63,8 +67,9 @@ export const Store = (props) => {
   const validationForm = (data) => {
     let errors = []
     setFormDataError((prevState) => ({ ...initialParamsFormData }));
+    console.log(data)
     for (let name in data) {
-      if ((!data[name]?.length === 0 || !data[name])) {
+      if (!data[name]?.length === 0) {
         setFormDataError((prevState) => ({ ...prevState, [name]: "Campo obrigatório" }));
         errors.push({ name: 'Campo obrigátorio' })
       }
