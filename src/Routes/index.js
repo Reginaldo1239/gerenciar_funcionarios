@@ -3,6 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
+
 } from "react-router-dom";
 import Employee from './Employees';
 import EmployeeStore from './Employees/Store';
@@ -16,7 +18,9 @@ const Routes = (props) => {
     <Router>
       <Header />
       <Content>
+
         <Switch>
+          <Route exact path={`/`} component={() => <Redirect to="/employees" />} />
           <Route exact path={`/employees`} component={Employee} />
           <Route exact path={`/employees/store`} component={EmployeeStore} />
           <Route exact path={`/employees/store/:id`} component={EmployeeStore} />
@@ -24,6 +28,7 @@ const Routes = (props) => {
         </Switch>
       </Content>
       <Footer />
+
     </Router>
 
   )
