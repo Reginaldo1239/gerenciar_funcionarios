@@ -4,12 +4,8 @@ import './App.css';
 import './Styles/Variables/index.css'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-
 import { store, persistor } from './Redux/Store';
-import Header from './Components/Header';
-import Content from './Components/Content';
-import Footer from './Components/Footer';
-import Loading from './Components/Loading';
+import Loading from './Components/Loading/index';
 import Routes from './Routes'
 
 function App() {
@@ -18,8 +14,8 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
           <Routes />
+          <Loading />
         </div>
-        <Loading />
       </PersistGate>
     </Provider >
 
