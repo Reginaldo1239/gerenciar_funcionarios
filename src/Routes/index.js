@@ -18,7 +18,6 @@ const Routes = (props) => {
     <Router>
       <Header />
       <Content>
-
         <Switch>
           <Route exact path={`/`} component={() => <Redirect to="/employees" />} />
           <Route exact path={`/employees`} component={Employee} />
@@ -28,7 +27,6 @@ const Routes = (props) => {
         </Switch>
       </Content>
       <Footer />
-
     </Router>
 
   )
