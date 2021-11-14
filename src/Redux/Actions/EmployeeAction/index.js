@@ -29,9 +29,12 @@ export const fetchEmployee = (data, config) => (dispatch) => {
 
 
 export const saveEmployee = (data, config) => dispatch => {
-  if (data.id) {
+
+  if (data?.id) {
+    console.log('12')
     dispatch(updateEmployee(data, config));
   } else {
+    console.log('12')
     dispatch(storeEmployee(data, config));
   }
 }

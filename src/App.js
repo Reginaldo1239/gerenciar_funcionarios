@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import './Styles/Variables/index.css'
 import ReduxProvider from './Components/ReduxProvider';

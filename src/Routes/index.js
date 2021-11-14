@@ -16,7 +16,7 @@ import Footer from "../Components/Footer";
 const Routes = (props) => {
   return (
     <Router>
-      <Header />
+      <Header/>
       <Content>
         <Switch>
           <Route exact path={`/`} component={() => <Redirect to="/employees" />} />
@@ -28,7 +28,6 @@ const Routes = (props) => {
       </Content>
       <Footer />
     </Router>
-
   )
 }
 

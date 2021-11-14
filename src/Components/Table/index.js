@@ -28,7 +28,7 @@ const Employees = (props) => {
         key: '1',
         id: 1,
         nome: 'Reginaldo',
-        cpf: '012.100.108-16',
+        cpf: '012.100.108-6',
       },
       {
         key: '2',
@@ -56,7 +56,7 @@ const Employees = (props) => {
               <tr key={index}>
                 {[...Array(Object.keys(data)?.length)].map((dataAux, index) => {
                   cell++
-                  if (columns[cell]?.render || data[columns[cell]?.dataIndex]) {
+                  if (columns[cell]?.render || data[columns[cell]?.dataIndex]||data[columns[cell]?.dataIndex]===0 ) {
                     return (
                       <td key={index}> {columns[cell]?.render
                         ? columns[cell]?.render(data)

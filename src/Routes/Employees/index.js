@@ -44,6 +44,10 @@ const Employees = (props) => {
       title: 'Dependentes',
       dataIndex: 'dependentes',
       key: 'dependentes',
+    },{
+      title: 'Dependentes IRRF',
+      dataIndex: 'desconto_imposto_renda',
+      key: 'desconto_imposto_renda',
     },
     {
       title: '',

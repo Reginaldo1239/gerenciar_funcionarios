@@ -7,6 +7,7 @@ import { Input } from '../../../Components/Inputs';
 import { Button } from '../../../Components/Buttons';
 import BoxTitle from '../../../Components/BoxTitle';
 import { DEPENDENT_TO_DISCOUNT } from '../../../Constants/Common'
+import { calculateBaseSalary, calculateIncomeTax } from '../../../Utils/Calculate';
 import Styles from './index.module.css';
 export const Store = (props) => {
   const initialParamsFormData = {
@@ -30,62 +31,62 @@ export const Store = (props) => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   }
 
-
   const _fetchEmployee = () => {
+    dispatch(toogleLoading(true));
     fetchEmployee({ id: routeParams?.id }, {
-      callback: () => null,
-      fallback: () => null
+      callback: () => dispatch(toogleLoading(false)),
+      fallback: () => dispatch(toogleLoading(false)),
     })
   }
 
-
   const onSubmitForm = () => {
-    if (validationForm()) {
+    let formDataAux = formData;
+    if (validationForm(formDataAux)) {
       dispatch(toogleLoading(true));
-      let formDataAux = formData;
       if (routeParams?.id) {
         formDataAux['id'] = routeParams?.id;
       }
-      formDataAux['salario_base'] = calcSalaryBase(formDataAux);
+      formDataAux['salario_base'] = calculateBaseSalary(formDataAux);
+      formDataAux['desconto_imposto_renda'] = calculateIncomeTax(formDataAux.salario_base);
       dispatch(saveEmployee(formData, {
-        callback: (data) => setTimeout(() => {
-          dispatch(toogleLoading(false))
+        callback: (data) => {
           if (!routeParams?.id) {
             setFormData((prevState) => ({ ...initialParamsFormData }))
           }
-        }, 2000),
+          dispatch(toogleLoading(false));
+        },
         fallback: () => dispatch(toogleLoading(false)),
       }))
     }
   }
-  const calcSalaryBase = (data) => {
-    let { salario, desconto, dependentes, } = data;
-    return (salario - desconto) - (dependentes * DEPENDENT_TO_DISCOUNT);
-  }
 
-  const validationForm = () => {
-    let formValid = true;
+  const validationForm = (data) => {
+    let errors = []
     setFormDataError((prevState) => ({ ...initialParamsFormData }));
-    for (let name in formData) {
-      if (!formData[name]?.length === 0 || !formData[name]) {
+    for (let name in data) {
+      if ((!data[name]?.length === 0 || !data[name])) {
         setFormDataError((prevState) => ({ ...prevState, [name]: "Campo obrigatório" }));
-        formValid = false;
+        errors.push({ name: 'Campo obrigátorio' })
       }
     }
-    return formValid;
+    return errors.length === 0;
   }
 
   useEffect(() => {
     if (employee) {
       setFormData((prevState) => ({
-        ...employee,
+        nome: employee.nome,
+        cpf: employee.cpf,
+        salario: employee.salario,
+        desconto: employee.desconto,
+        dependentes: employee.dependentes,
       }));
     }
   }, [employee?.id]);
 
 
   useEffect(() => {
-    !employee && _fetchEmployee();
+    (!employee && routeParams?.id) && _fetchEmployee();
   }, [routeParams?.id])
 
 
@@ -111,7 +112,6 @@ export const Store = (props) => {
           onChange={onHandelerFormData}
           value={formData.cpf}
           messageError={formDataError.cpf}
-
         />
         <Input
           fullWidth
@@ -122,7 +122,6 @@ export const Store = (props) => {
           onChange={onHandelerFormData}
           value={formData.salario}
           messageError={formDataError.salario}
-
         />
         <Input
           fullWidth

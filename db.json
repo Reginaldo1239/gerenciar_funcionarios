@@ -1,13 +1,69 @@
 {
   "employees": [
     {
-      "nome": "ddd",
-      "cpf": "442.515.151-45",
-      "salario": "10.00",
+      "nome": "11aaa",
+      "cpf": "111.111.111-11",
+      "salario": "11.11",
       "desconto": "10.00",
+      "dependentes": "0",
+      "salario_base": 1.1099999999999994,
+      "id": 1636858176241
+    },
+    {
+      "nome": "ddddddddd",
+      "cpf": "111.111.111-11",
+      "salario": "11.11",
+      "desconto": "1.11",
+      "dependentes": "11",
+      "salario_base": -1800.16,
+      "id": 1636858216090
+    },
+    {
+      "nome": "11111111111111",
+      "cpf": "111.111.111-11",
+      "salario": "111.11",
+      "desconto": "11.11",
+      "dependentes": "2",
+      "salario_base": -229.12,
+      "id": 1636896993073
+    },
+    {
+      "nome": "dsds",
+      "cpf": "442.500.608-96",
+      "salario": "111111111.11",
+      "desconto": "11.11",
+      "dependentes": "1",
+      "salario_base": 111110935.44,
+      "id": 1636897091899
+    },
+    {
+      "nome": "dddddd",
+      "cpf": "442.500.608-96",
+      "salario": "11.11",
+      "desconto": "11.11",
       "dependentes": "1",
       "salario_base": -164.56,
-      "id": 1636839822505
+      "id": 1636897106900
+    },
+    {
+      "nome": "reginaldoa",
+      "cpf": "211.111.111-11",
+      "salario": "10000.00",
+      "desconto": "0.00",
+      "dependentes": "0",
+      "id": 1636906164006,
+      "salario_base": 10000,
+      "desconto_imposto_renda": 1880.6399999999999
+    },
+    {
+      "nome": "dddd",
+      "cpf": "111.111.111-11",
+      "salario": "10000.00",
+      "desconto": "0.00",
+      "dependentes": "0",
+      "id": 1636908737195,
+      "salario_base": 10000,
+      "desconto_imposto_renda": 1880.6399999999999
     }
   ]
 }

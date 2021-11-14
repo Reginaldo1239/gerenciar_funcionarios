@@ -10,10 +10,11 @@ const initialState = {};
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['Loading']
 }
 
 
 const persistedReducer = persistReducer(persistConfig, RootReducer)
 
-export const store= createStore(persistedReducer,composeWithDevTools(applyMiddleware(thunk)));
+export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
 export const persistor = persistStore(store, [persistConfig])
