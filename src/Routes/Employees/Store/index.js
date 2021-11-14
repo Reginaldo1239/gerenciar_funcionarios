@@ -6,10 +6,10 @@ import { toogleLoading } from '../../../Redux/Actions/LoadingAction';
 import { Input } from '../../../Components/Inputs';
 import { Button } from '../../../Components/Buttons';
 import BoxTitle from '../../../Components/BoxTitle';
-import {DEPENDENT_TO_DISCOUNT} from '../../../Constants/Common'
+import { DEPENDENT_TO_DISCOUNT } from '../../../Constants/Common'
 import Styles from './index.module.css';
 export const Store = (props) => {
-  const paramsFormData = {
+  const initialParamsFormData = {
     nome: '',
     cpf: '',
     salario: '',
@@ -18,8 +18,8 @@ export const Store = (props) => {
   }
   const history = useHistory();
   const routeParams = useParams();
-  const [formData, setFormData] = useState(paramsFormData);
-  const [formDataError, setFormDataError] = useState(paramsFormData);
+  const [formData, setFormData] = useState(initialParamsFormData);
+  const [formDataError, setFormDataError] = useState(initialParamsFormData);
   const [error, setError] = useState('');
   const employee = useSelector((state) => state.Employee[routeParams?.id]);
   const dispatch = useDispatch();
@@ -40,25 +40,39 @@ export const Store = (props) => {
 
 
   const onSubmitForm = () => {
-    dispatch(toogleLoading(true));
-    let formDataAux = formData;
-    if (routeParams?.id) {
-      formDataAux['id'] = routeParams?.id;
-    }
-    formDataAux['salario_base'] = calcSalaryBase(formDataAux);
-    dispatch(saveEmployee(formData, {
-      callback: (data) => setTimeout(() => {
-         dispatch(toogleLoading(false))
-         history.replace({ pathname: `/employees/store/${data.id}`, state: { isActive: true } });
-
+    if (validationForm()) {
+      dispatch(toogleLoading(true));
+      let formDataAux = formData;
+      if (routeParams?.id) {
+        formDataAux['id'] = routeParams?.id;
+      }
+      formDataAux['salario_base'] = calcSalaryBase(formDataAux);
+      dispatch(saveEmployee(formData, {
+        callback: (data) => setTimeout(() => {
+          dispatch(toogleLoading(false))
+          if (!routeParams?.id) {
+            setFormData((prevState) => ({ ...initialParamsFormData }))
+          }
         }, 2000),
-      fallback: () => setTimeout(() => { dispatch(toogleLoading(false)) }, 2000),
-    }))
-
+        fallback: () => dispatch(toogleLoading(false)),
+      }))
+    }
   }
   const calcSalaryBase = (data) => {
     let { salario, desconto, dependentes, } = data;
     return (salario - desconto) - (dependentes * DEPENDENT_TO_DISCOUNT);
+  }
+
+  const validationForm = () => {
+    let formValid = true;
+    setFormDataError((prevState) => ({ ...initialParamsFormData }));
+    for (let name in formData) {
+      if (!formData[name]?.length === 0 || !formData[name]) {
+        setFormDataError((prevState) => ({ ...prevState, [name]: "Campo obrigatório" }));
+        formValid = false;
+      }
+    }
+    return formValid;
   }
 
   useEffect(() => {
