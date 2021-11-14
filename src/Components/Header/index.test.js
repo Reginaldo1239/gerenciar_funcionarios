@@ -7,8 +7,6 @@ import Styles from './index.module.css';
 
 test('render componente Header e verifica o titulo e link', () => {
   const { container } = render(<Router><Header /></Router>);
-
-
   expect(container.getElementsByClassName(Styles.header)[0]).toHaveTextContent('Inicio');
   expect(container.getElementsByTagName('a')[0]).toHaveTextContent('Inicio');
   expect(container.getElementsByTagName('a')[0]).toHaveAttribute('href','/employees')
