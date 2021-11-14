@@ -28,13 +28,13 @@ const Employees = (props) => {
         key: '1',
         id: 1,
         nome: 'Reginaldo',
-        cpf: '442.500.608-96',
+        cpf: '012.100.108-16',
       },
       {
         key: '2',
         id: 2,
         nome: 'Reginaldo2',
-        cpf: '442.500.608-96',
+        cpf: '002.00.018-12',
       },
     ]; */
 

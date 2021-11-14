@@ -52,7 +52,7 @@ describe('teste componente Table', () => {
     expect(container.getElementsByTagName('th')[0]).toHaveTextContent(titleColumn[0]);
     //texto da coluna 1
     expect(container.getElementsByTagName('th')[1]).toHaveTextContent(titleColumn[1]);
-     //texto que do parametro render
+    //texto que do parametro render
     expect(container).toHaveTextContent(textToRendeComponent);
   });
 })
