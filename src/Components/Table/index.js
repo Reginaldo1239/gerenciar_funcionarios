@@ -51,16 +51,16 @@ const Employees = (props) => {
             )}
           </tr>
           {dataSource?.map((data, index) => {
-            let cell = -1;
+            let cellIndex = -1;
             return (
               <tr key={index}>
                 {[...Array(Object.keys(data)?.length)].map((dataAux, index) => {
-                  cell++
-                  if (columns[cell]?.render || data[columns[cell]?.dataIndex]||data[columns[cell]?.dataIndex]===0 ) {
+                  cellIndex++
+                  if (columns[cellIndex]?.render || data[columns[cellIndex]?.dataIndex]||data[columns[cellIndex]?.dataIndex]===0 ) {
                     return (
-                      <td key={index}> {columns[cell]?.render
-                        ? columns[cell]?.render(data)
-                        : data[columns[cell]?.dataIndex]}
+                      <td key={index}> {columns[cellIndex]?.render
+                        ? columns[cellIndex]?.render(data)
+                        : data[columns[cellIndex]?.dataIndex]}
                       </td>)
                   }
                   return <td key={index}> </td>
